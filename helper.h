@@ -1,5 +1,5 @@
-#ifndef EJERCICIO2_H
-#define EJERCICIO2_H
+#ifndef HELPER_H
+#define HELPER_H
 
 #include<iostream>
 #include<list>
@@ -10,7 +10,6 @@ using namespace std;
 class Raton{
 public:
     Raton (float p): peso(p){}
-    ~Raton (){}
     float Getpeso()
     {
         return peso;
@@ -158,22 +157,25 @@ public:
     Raton * CrearRaton(float peso)
     {
         Raton * aux= new Raton(peso);
-        return aux;  
+        return aux;
     }
     void ImprimirRatones()
     {
+        system("clear");
         int i=0;
+        cout << "+-------------------------------------------------------+" << endl;
+        cout << "|                  Lista de Ratones                     |" << endl;
+        cout << "+-------------------------------------------------------+" << endl;
         for(auto & aux : ratones)
         {
             cout<<"Raton "<<i+1<<" tiene un peso de "<<aux->Getpeso()<<" a una distancia de "<<aux->GetDistancia()<<" de Tom"<<endl;
+            cout << "+-------------------------------------------------------+" << endl;
             i++;
         }
     }
     void Cazar()
     {
         int opcion;
-        system("clear");
-        cout<<"Info de Ratones"<<endl;
         ImprimirRatones();
         cout<<"Presione el nro de raton a Cazar!!!"<<endl;
         cin>>opcion;
@@ -216,6 +218,5 @@ private:
     list<Raton*> ratones;
     bool interactuar= true;
 };
-
 
 #endif
