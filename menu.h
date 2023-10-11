@@ -126,7 +126,7 @@ public:
             list<Raton*>::iterator iter = next(ratones.begin(), opcion-1);      //Identificando el elemento dentro de la lista
             if(tom->meConvieneComerRatonA((*iter),(*iter)->GetDistancia()))     //Evalua si puede cazarlo, si le da la energia para correr la distancia requerida
             {
-                cout<<"Tom corrio "<<(*iter)->GetDistancia()<<" Gastando "<<tom->ConsumoXCorrer((*iter)->GetDistancia())<<"J de energia a una Velocidad de "<<tom->ConsultaVelocidad()<<" tardando "<<(*iter)->GetDistancia()/tom->ConsultaVelocidad()<<"seg"<<endl;
+                cout<<"Tom corrio "<<(*iter)->GetDistancia()<<"mts Gastando "<<tom->ConsumoXCorrer((*iter)->GetDistancia())<<"J de energia a una Velocidad de "<<tom->ConsultaVelocidad()<<" tardando "<<(*iter)->GetDistancia()/tom->ConsultaVelocidad()<<"seg"<<endl;
                 tom->ComerRaton((*iter));           
                 ratones.erase(iter);            //Elimina de la lista al elemento
             }else
