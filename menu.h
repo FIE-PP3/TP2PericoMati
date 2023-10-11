@@ -5,6 +5,7 @@
 class Menu
 {
 public:
+    /* Menu Principal con sus cases*/
     void menu()
     {
         while(interactuar){
@@ -48,14 +49,14 @@ public:
                 Pause();
                 break;
             case 4:
-                if(ratones.size() && tom!=NULL)
+                if(ratones.size() && tom!=NULL) //para cazar tienen q existir ratones y Tom
                     Cazar();
                 else
                     cout<<"No hay Ratones para cazar, o no se inicializo a Tom!!"<<endl;
                 Pause();
                 break;
             case 5:
-                if(tom!=NULL)
+                if(tom!=NULL) // para preguntar sobre la sutiacion de Tom tiene que existir
                 {
                     SituacionTom();
                 }else
@@ -65,21 +66,23 @@ public:
                 break;
             
             case 0:
-                interactuar=false;
+                interactuar=false; // Accion de terminar el programa
                 break;
             default:
                 break;
             }
         }
     }
+    /*Instancia un Un Objeto Gato y devuelve su direccion de memoria*/
     Gato * IniciarATom()
     {
         float inicio;
         cout<<"Ingrese la energia inicial de Tom... ";
         cin>>inicio;
-        Gato * aux= new Gato(inicio);
+        Gato * aux= new Gato(inicio);   // asignacion de memoria dinamica e instancia del objeto
         return aux;        
     }
+    /* Inicio/ Agrego Objetos de la clase Raton en mi lista de punteros de Raton (list<Raton*>)*/
     void ListarRatones(int cant)
     {
         for (int i = 0; i < cant; i++)
@@ -87,42 +90,45 @@ public:
             float peso;
             cout<<"Ingrese el peso del raton "<<i+1<<" ..."<<endl;
             cin>>peso;
-            ratones.push_back(CrearRaton(peso));
+            ratones.push_back(CrearRaton(peso));        // agrega elementos al final de la lista
         }
     }
+    /*Instancia un Un Objeto Raton y devuelve su direccion de memoria*/
     Raton * CrearRaton(float peso)
     {
         Raton * aux= new Raton(peso);
         return aux;
     }
+    /*Imprime por pantalla la lista de Ratones*/
     void ImprimirRatones()
     {
         system("clear");
         int i=0;
-        cout << "+-------------------------------------------------------+" << endl;
-        cout << "|                  Lista de Ratones                     |" << endl;
-        cout << "+-------------------------------------------------------+" << endl;
+        cout << "+-----------------------------------------------------------+" << endl;
+        cout << "|                    Lista de Ratones                       |" << endl;
+        cout << "+-----------------------------------------------------------+" << endl;
         for(auto & aux : ratones)
         {
-            cout<<"Raton "<<i+1<<" tiene un peso de "<<aux->Getpeso()<<" a una distancia de "<<aux->GetDistancia()<<" de Tom"<<endl;
-            cout << "+-------------------------------------------------------+" << endl;
+            cout<<"Raton "<<i+1<<" tiene un peso de "<<aux->Getpeso()<<"g a una distancia de "<<aux->GetDistancia()<<"mts de Tom"<<endl;
+            cout << "+-----------------------------------------------------------+" << endl;
             i++;
         }
     }
+    /*Accion de "Cazar",Elige y Elimina un Raton de la lista, si le es posible cazarlo*/
     void Cazar()
     {
         int opcion;
         ImprimirRatones();
         cout<<"Presione el nro de raton a Cazar!!!"<<endl;
         cin>>opcion;
-        if(opcion<=int(ratones.size()))
+        if(opcion<=int(ratones.size()))     //validación
         {
-            list<Raton*>::iterator iter = next(ratones.begin(), opcion-1);
-            if(tom->meConvieneComerRatonA((*iter),(*iter)->GetDistancia()))
+            list<Raton*>::iterator iter = next(ratones.begin(), opcion-1);      //Identificando el elemento dentro de la lista
+            if(tom->meConvieneComerRatonA((*iter),(*iter)->GetDistancia()))     //Evalua si puede cazarlo, si le da la energia para correr la distancia requerida
             {
                 cout<<"Tom corrio "<<(*iter)->GetDistancia()<<" Gastando "<<tom->ConsumoXCorrer((*iter)->GetDistancia())<<"J de energia a una Velocidad de "<<tom->ConsultaVelocidad()<<" tardando "<<(*iter)->GetDistancia()/tom->ConsultaVelocidad()<<"seg"<<endl;
-                tom->ComerRaton((*iter));
-                ratones.erase(iter);
+                tom->ComerRaton((*iter));           
+                ratones.erase(iter);            //Elimina de la lista al elemento
             }else
             {
                 cout<<"A Tom no le conviene correr a ese raton"<<endl;
@@ -132,11 +138,13 @@ public:
             cout<<"Nro de Ratones invalido"<<endl;
         }
     }
+    /*funcion para... Presionar una tecla antes de continuar*/
     void Pause()
     {
         cout<<endl<<"Aprete cualquier tecla para contunuar..."<<endl;
         system("read");
     }
+    /*Informa la situacion de TOM*/
     void SituacionTom()
     {
         system("clear");
