@@ -10,6 +10,7 @@ using namespace std;
 class Raton{
 public:
     Raton (float p): peso(p){}
+    ~Raton (){}
     float Getpeso()
     {
         return peso;
@@ -218,5 +219,6 @@ private:
     list<Raton*> ratones;
     bool interactuar= true;
 };
+
 
 #endif
