@@ -1,10 +1,9 @@
-#include<iostream>
+#include "Ejercicio2.h"
 
-#include "helper.h"
-
-using namespace std;
 
 int main (){
-    cout<<"Primer commit"<<endl;
+    srand(time(nullptr));
+    Menu menu;
+    menu.menu();
     return 0;
 }
